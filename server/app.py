@@ -5,21 +5,20 @@ from flask import Flask, request, jsonify
 from flask_migrate import Migrate
 from models import db, Hero, Power, HeroPower
 
-# Setup database connection
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
 
-# Initialize Flask app
+
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 
-# Initialize migration
+
 migrate = Migrate(app, db)
 db.init_app(app)
 
-# Define routes
 @app.route("/")
 def index():
     return "<h1>Code challenge</h1>"
